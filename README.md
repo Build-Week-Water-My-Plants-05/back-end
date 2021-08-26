@@ -19,7 +19,6 @@ With an easy to use interface for creating a plant watering schedule tailored to
     - `image`: (optional)
 4. Authenticated `user` can view a list of created `plants`.  A `plant` can be deleted or selected to present `user` with a detail view where `user` can then update any property of the selected `plant`. 
 5. Authenticated `user` can update their `phoneNumber` and `password`.
-6. Authenticated `user` can update their `phoneNumber` and `password`.
 
 ## 🏃‍♀️ **Stretch**
 
