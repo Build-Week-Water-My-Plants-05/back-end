@@ -29,7 +29,7 @@ With an easy to use interface for creating a plant watering schedule tailored to
 
 3. Authenticated `user` can upload `image`s of a `plant`. If no user `image` is provided, a placeholder `image` of a plant of the same `species` populates the view.
 
-### API
+# API
 Disclaimer: this documentation last updated on August 26, 2021 and does not take into effect changes after that date.
 
 ## Core
@@ -37,71 +37,94 @@ The core app is located at: https://wmp-api.herokuapp.com/
 A GET call to this address will return a message "Yip yip, Appa!" to let you know you are connected.
 
 ## /api/auth
-# register
+### register
+
 Requires JSON {
     username,
     password,
     phoneNumber
 }
 
-# login
+### login
+
 Requires JSON {
     username,
     password
 }
+
 Response includes an auth token that expires in 24 hours
 
-### Note: below this line, the API requires a valid auth token
+## Note: below this line, the API requires a valid auth token
 
 ## /api/users
-# GET
+### GET
+
 A user can only get their own information; their userID is pulled from the auth token.
 
-# PUT
+### PUT
 User does not need all fields in the JSON.
+
 Only the user in the auth token may be changed.
+
 Changed passwords are encrypted before being saved to the database.
+
 Phone number checked for valid format by phonejs node module.
 
 ## /api/plants
-# GET
+### GET
+
 Returns a list of plants created by the user, verified by the auth token.
 
-# POST
+### POST
+
 Requires JSON {
     h2oInterval,
     h2oAmount
 }
+
 plantID and ownerID are bigint assigned by back-end.
+
 speciesID is a string that does NOT currently link to the species table
+
 nickname and lastWatered are optional strings
+
 image is a placeholder string, would be replaced by blob to actually hold image
 
-# PUT/:plantID
+### PUT/:plantID
+
 Full JSON not required
+
 plantID must match a plant owned by userID in auth token
 
-# DELETE/:plantID
+### DELETE/:plantID
+
 userID in auth token must match ownerID of plant
 
 ## /api/species
+
 Warning: currently does not check ownerID; use PUT and DELETE with caution
+
 Disclaimer: Was unwired from plants to enable direct string entry.  This is bad programming, and would not happen in a real project.
 
-# GET
+### GET
 Returns a list of all plant species
 
-# POST
+### POST
+
 Requires JSON {
     speciesName,
     h2oInterval,
     h2oAmount
 }
+
 speciesID assigned by back end
+
 image field would be converted to blob to hold actual image data
 
-# PUT/:speciesID
+### PUT/:speciesID
+
 Warning: currently changes species without checking for plants not owned by userID in auth token
 
-# DELETE/:speciesID
+### DELETE/:speciesID
+
 Warning: currently removes without checking for plants not owned by userID in auth token
